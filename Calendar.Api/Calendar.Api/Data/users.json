@@ -1,0 +1,18 @@
+[
+  {
+    "UserId": "123",
+    "FirstName": "Sara",
+    "LastName": "Cohen",
+    "Email": "sara@gmail.com",
+    "Phone": "0527164545",
+    "Password": "123"
+  },
+  {
+    "UserId": "456",
+    "FirstName": "Chana",
+    "LastName": "Booksboim",
+    "Email": "chana@Booksboim.com",
+    "Phone": "0528565232",
+    "Password": "456"
+  }
+]

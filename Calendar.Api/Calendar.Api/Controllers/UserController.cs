@@ -1,7 +1,9 @@
+using Calendar.Api.Application;
 using Calendar.Api.DTO.Commands;
 using Calendar.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Numerics;
+using System.Xml;
 
 namespace Calendar.Api.Controllers
 {
@@ -10,12 +12,8 @@ namespace Calendar.Api.Controllers
     public class UserController : ControllerBase
     {
 
-        private static List<User> users = new();
-        
+        private static List<User> users = DataService.LoadUsers();
 
-        // TODO: read users from file 
-        //string json = File.ReadAllText("myobjects.json");
-        //var playerList = JsonConvert.DeserializeObject<List<Player>>(json);
 
         private readonly ILogger<UserController> _logger;
 
@@ -41,8 +39,10 @@ namespace Calendar.Api.Controllers
         [Route("Register")]
         public IResult Register(User newUser)
         {
+            if (users.Exists(user => user.UserId == newUser.UserId))
+                return Results.Conflict(new Exception("User already exists"));
             users.Add(newUser);
-            // TODO: save to file
+            DataService.SaveUsers(users);
             return Results.Ok();
         }
     }
